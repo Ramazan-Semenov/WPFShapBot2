@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
 using WPFShapBot.Models.DataContext;
 
 namespace WPFShapBot.Models
@@ -21,8 +22,18 @@ namespace WPFShapBot.Models
         {
             try
             {
-                Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
-                UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
+                if (UserContext.Users[UserContext.Users.IndexOf(person)].Сount < ContextQuest.Questions.Count)
+                {
+                   // MessageBox.Show(ContextQuest.Questions.Count.ToString());
+                    Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+                    UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
+                }
+                else
+                {
+                    UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
+                    Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, "Конец", replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+
+                }
             }
             catch (Exception e)
             {

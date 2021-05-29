@@ -3,26 +3,21 @@ using System.Diagnostics;
 using System.Windows;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
+using WPFShapBot.Models.Commandbot;
 using WPFShapBot.Models.DataContext;
 
 namespace WPFShapBot.Models.BotStart
 {
     public class StartBot
     {
+        static bool ff = true;
 
-        // private static ObservableCollection<BotUser> Users;
-        // public static ObservableCollection<UserEmail> userEmails;
-        static bool ff = false;
-
-        static ObservableCollection<Questions> resert = Models.DataContext.ContextQuest.Questions;
         ObservableCollection<Commandbot.ComBot> com = new ObservableCollection<Commandbot.ComBot>();
 
         public static ObservableCollection<Questions> questions = Models.DataContext.ContextQuest.Questions;
-        private static ObservableCollection<Questions> command_1;
 
 
-        string gg = @"Добро пожаловать в КубГТУ! Абитуриентам мы особо рады, поможем определиться с выбором, расскажем про все этапы подачи документов.
-И самое главное, не нужно никуда ехать, документы на рассмотрение можно прислать сюда, а далее после проверки, специалист приемной комиссии свяжемся с Вами для согласования дальнейших действий 😇 Всё просто)";
+
 
 
 
@@ -45,20 +40,23 @@ namespace WPFShapBot.Models.BotStart
             TeleBot.Bot.StopReceiving();
 
         }
-       
+
         private async void OnInlineQueryHandler(object sender, CallbackQueryEventArgs e)
         {
+
+            
             com = DataContext.ContextCommand.GetComBots();
             foreach (var item in com)
             {
                 if (e.CallbackQuery.Data == item.Name)
                 {
+                    ff = item.ff;
                     item.ex(e);
                     break;
                 }
 
             }
-       
+
             if (e.CallbackQuery.Data == "send")
             {
 
@@ -73,10 +71,10 @@ namespace WPFShapBot.Models.BotStart
 
                     }
                 }
-                ;
-
-                await new Save().sAsync(new Save().creatdir(@"C:\Users\Roma\Desktop\проверка", e.CallbackQuery.Message.Chat.Id.ToString()) + "\\" + e.CallbackQuery.Message.Chat.Id.ToString() + ".txt", text);
+                   await new Save().sAsync(new Save().creatdir(@"C:\Users\Roma\Desktop\проверка", e.CallbackQuery.Message.Chat.Id.ToString()) + "\\" + e.CallbackQuery.Message.Chat.Id.ToString() + ".txt", text);
             }
+
+            //}
             //else if (e.CallbackQuery.Data == "Command_3")
             //{
             //    questions = new ObservableCollection<Questions>();
@@ -87,13 +85,9 @@ namespace WPFShapBot.Models.BotStart
             //    //   await bot.Bot.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Command_2");
             //}
 
+
         }
 
-        /// <summary>
-        /// Событие на получение сообщений
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e">Получения клиента и его данных из сообщения</param>
         private static async void OnMessageHandler(object sender, MessageEventArgs e)
         {
 
@@ -114,6 +108,5 @@ namespace WPFShapBot.Models.BotStart
 
 
         }
-
     }
 }
