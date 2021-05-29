@@ -6,15 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFShapBot.Models
+namespace WPFShapBot.Models.BaseUser
 {
-  public abstract class BaseUser: INotifyPropertyChanged, IEquatable<BaseUser>
-  
+    abstract class BaseUser : INotifyPropertyChanged, IEquatable<BaseUser>
+
     {
         public BaseUser(string nike, long id)
         {
-           this. id = id;
-           this.nike = nike;
+            this.id = id;
+            this.nike = nike;
 
             Messages = new ObservableCollection<string>();
         }

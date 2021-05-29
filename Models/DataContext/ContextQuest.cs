@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace WPFShapBot.Models.DataContext
@@ -17,7 +12,7 @@ namespace WPFShapBot.Models.DataContext
 
         public ContextQuest()
         {
-          if(questions==null)
+            if (questions == null)
             {
                 questions = new ObservableCollection<Questions>();
             }

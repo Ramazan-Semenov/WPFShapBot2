@@ -78,7 +78,7 @@
     <Compile Include="Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseUser.cs" />
+    <Compile Include="Models\BaseUser\BaseUser.cs" />
     <Compile Include="Models\BotButtons.cs" />
     <Compile Include="Models\BotStart\StartBot.cs" />
     <Compile Include="Models\BotUser.cs" />

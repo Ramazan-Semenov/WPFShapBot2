@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using WPFShapBot.Models;
 
@@ -16,11 +10,13 @@ namespace WPFShapBot.ViewModel
         public AddQuestViewModel()
         {
             AddCommand = new Control.LambdaCommand(OnGetCommandExecuteClose, CanGetCommandExecuteClose);
-            DelCommand=new Control.LambdaCommand(OnGetCommandExecuteDel, CanGetCommandExecuteDel);
+            DelCommand = new Control.LambdaCommand(OnGetCommandExecuteDel, CanGetCommandExecuteDel);
 
         }
         private ObservableCollection<Questions> _que = Models.DataContext.ContextQuest.Questions;
-        public ObservableCollection<Questions> que { get => _que;
+        public ObservableCollection<Questions> que
+        {
+            get => _que;
             set
             {
                 _que = value;
@@ -33,8 +29,8 @@ namespace WPFShapBot.ViewModel
         private bool CanGetCommandExecuteClose(object param) => true;
         private void OnGetCommandExecuteClose(object param)
         {
-            Questions questions = new Questions() {  Text = this.txt };
-             Models.DataContext.ContextQuest.addquestions(questions);
+            Questions questions = new Questions() { Text = this.txt };
+            Models.DataContext.ContextQuest.addquestions(questions);
 
             foreach (var item in que)
             {
@@ -51,10 +47,10 @@ namespace WPFShapBot.ViewModel
         private bool CanGetCommandExecuteDel(object param) => true;
         private void OnGetCommandExecuteDel(object param)
         {
-        //    Questions questions = new Questions() { Text = this.txt };
+            //    Questions questions = new Questions() { Text = this.txt };
             Models.DataContext.ContextQuest.Delquestions(0);
 
-      
+
         }
     }
 }

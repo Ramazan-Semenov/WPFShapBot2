@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
@@ -12,14 +7,14 @@ using WPFShapBot.Models.DataContext;
 
 namespace WPFShapBot.Models.BotStart
 {
-   public class StartBot
+    public class StartBot
     {
-       
-       // private static ObservableCollection<BotUser> Users;
-       // public static ObservableCollection<UserEmail> userEmails;
+
+        // private static ObservableCollection<BotUser> Users;
+        // public static ObservableCollection<UserEmail> userEmails;
         static bool ff = false;
 
-          static ObservableCollection<Questions> resert = Models.DataContext.ContextQuest.Questions;
+        static ObservableCollection<Questions> resert = Models.DataContext.ContextQuest.Questions;
         ObservableCollection<Commandbot.ComBot> com = new ObservableCollection<Commandbot.ComBot>();
 
         public static ObservableCollection<Questions> questions = Models.DataContext.ContextQuest.Questions;
@@ -29,12 +24,12 @@ namespace WPFShapBot.Models.BotStart
         string gg = @"Добро пожаловать в КубГТУ! Абитуриентам мы особо рады, поможем определиться с выбором, расскажем про все этапы подачи документов.
 И самое главное, не нужно никуда ехать, документы на рассмотрение можно прислать сюда, а далее после проверки, специалист приемной комиссии свяжемся с Вами для согласования дальнейших действий 😇 Всё просто)";
 
-         
 
-    public StartBot()
+
+        public StartBot()
         {
 
-        
+
         }
         public void start()
         {
@@ -50,47 +45,20 @@ namespace WPFShapBot.Models.BotStart
             TeleBot.Bot.StopReceiving();
 
         }
-
+       
         private async void OnInlineQueryHandler(object sender, CallbackQueryEventArgs e)
         {
-            ObservableCollection<Questions> command = new ObservableCollection<Questions>();
-
-            command.Add(new Questions { ID = 1, Text = "фио" });
-            command.Add(new Questions { ID = 2, Text = "номер телефона" });
-            ObservableCollection<Questions> command1 = new ObservableCollection<Questions>();
-            command1.Add(new Questions { ID = 2, Text = "Отправлено" });
-            com.Add(new Commandbot.ComBot(command) { Name = "Command_1" });
-            com.Add(new Commandbot.ComBot(command1) { Name = "send" });
-            com.Add(new Commandbot.ComBot(resert) { Name = "Command_3" });
-            //    MessageBox.Show(e.CallbackQuery.InlineMessageId);
+            com = DataContext.ContextCommand.GetComBots();
             foreach (var item in com)
             {
                 if (e.CallbackQuery.Data == item.Name)
                 {
-                      //    MessageBox.Show(item.Name);
                     item.ex(e);
                     break;
                 }
 
             }
-
-            //if (e.CallbackQuery.Data == "Command_1")
-            //{
-            //    ff = true;
-            //    questions = new ObservableCollection<Questions>();
-            //    command_1 = new ObservableCollection<Questions>();
-
-            //    List<string> ss = new List<string>();
-            //    ss.Add("send");
-            //    ss.Add("Управа");
-            //    command_1.Add(new Questions { ID = 1, Text = "фио" });
-            //    command_1.Add(new Questions { ID = 2, Text = "номер телефона" });
-            //    command_1.Add(new Questions { ID = 3, Text = "направление", replyMarkup = new BotButtons().GenInlineButton(ss) });
-            //    questions = command_1;
-            //    new MessageClient(UserContext.Users, questions, read: ff, UserContext.UserEmails).GenMessage(e);
-
-
-            //}
+       
             if (e.CallbackQuery.Data == "send")
             {
 

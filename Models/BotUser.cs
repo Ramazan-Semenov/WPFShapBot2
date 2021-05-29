@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WPFShapBot.Models
 {
@@ -81,8 +77,8 @@ namespace WPFShapBot.Models
 
         //public static explicit operator BotUser(UserEmail v)
         //{
-            
-           
+
+
         //    return new BotUser(); ;
 
         //}

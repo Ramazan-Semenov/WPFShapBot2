@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using WPFShapBot.Models.DataContext;
 using System.Threading.Tasks;
 using System.Windows;
 using Telegram.Bot.Args;
+using WPFShapBot.Models.DataContext;
 namespace WPFShapBot.Models
 {
     public class MessageClient : TeleBot
     {
 
         //private ObservableCollection<BotUser> Users;
-      //  private ObservableCollection<Questions> mes;
+        //  private ObservableCollection<Questions> mes;
         public static bool Read;
         ObservableCollection<UserEmail> userEmails;
         private StepQuestionsClass StepQuestions;
@@ -23,7 +21,7 @@ namespace WPFShapBot.Models
         {
             UserContext.Users = Users;
             ContextQuest.Questions = mes;
-        //    this.mes = mes;
+            //    this.mes = mes;
             Read = read;
             this.userEmails = userEmails;
             StepQuestions = new StepQuestionsClass(Users, mes);
@@ -53,9 +51,9 @@ namespace WPFShapBot.Models
                 NewUser(e);
 
                 var file = Bot.GetFileAsync(e.Message.Document.FileId);
-            new Save().creatdir(@"C:\Users\Roma\Desktop\проверка", e.Message.Chat.Id.ToString());
+                new Save().creatdir(@"C:\Users\Roma\Desktop\проверка", e.Message.Chat.Id.ToString());
 
-            var fileName = @"C:\Users\Roma\Desktop\проверка\"+ e.Message.Chat.Id.ToString()+"\\" + file.Result.FileId + "." + file.Result.FilePath.Split('.').Last();
+                var fileName = @"C:\Users\Roma\Desktop\проверка\" + e.Message.Chat.Id.ToString() + "\\" + file.Result.FileId + "." + file.Result.FilePath.Split('.').Last();
                 Debug.WriteLine(file.Result.FilePath);
                 using (var saveImageStream = File.Open(fileName, FileMode.Create))
                 {
@@ -64,13 +62,13 @@ namespace WPFShapBot.Models
                     await Bot.DownloadFileAsync(file.Result.FilePath, saveImageStream);
                 }
                 await Bot.SendTextMessageAsync(e.Message.Chat.Id, "Document save");
-                await  Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+                await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
                 UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
 
             }
-            catch (Exception exp) 
+            catch (Exception exp)
             {
-                UserContext.Users[UserContext.Users.IndexOf(person)].Сount=0;
+                UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
 
                 File.AppendAllText("data.log", $"\n{exp.Message}\n");
             }
@@ -136,8 +134,8 @@ namespace WPFShapBot.Models
                 }
 
                 StepQuestions.StepQuestions(person);
-            } 
-            catch(Exception exp)
+            }
+            catch (Exception exp)
             {
                 File.AppendAllText("data.log", $"\n{exp.Message}\n");
 
@@ -154,9 +152,9 @@ namespace WPFShapBot.Models
                 NewUser(e);
 
                 var file = Bot.GetFileAsync(e.CallbackQuery.Message.Document.FileId);
-            new Save().creatdir(@"C:\Users\Roma\Desktop\проверка", e.CallbackQuery.Message.Chat.Id.ToString());
+                new Save().creatdir(@"C:\Users\Roma\Desktop\проверка", e.CallbackQuery.Message.Chat.Id.ToString());
 
-            var fileName = @"C:\Users\Roma\Desktop\проверка\" + e.CallbackQuery.Message.Chat.Id.ToString() + "\\" + file.Result.FileId + "." + file.Result.FilePath.Split('.').Last();
+                var fileName = @"C:\Users\Roma\Desktop\проверка\" + e.CallbackQuery.Message.Chat.Id.ToString() + "\\" + file.Result.FileId + "." + file.Result.FilePath.Split('.').Last();
                 Debug.WriteLine(file.Result.FilePath);
                 using (var saveImageStream = File.Open(fileName, FileMode.Create))
                 {
@@ -168,11 +166,11 @@ namespace WPFShapBot.Models
                 await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
 
                 UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
-           
+
             }
-               catch (Exception exp)
+            catch (Exception exp)
             {
-                UserContext.Users[UserContext.Users.IndexOf(person)].Сount=0;
+                UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
 
                 File.AppendAllText("data.log", $"\n{exp.Message}\n");
 
@@ -183,23 +181,23 @@ namespace WPFShapBot.Models
         {
             //try
             //{
-                ////newuser(e)
-                var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id);
+            ////newuser(e)
+            var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id);
 
-                var file = bot.GetFileAsync(e.CallbackQuery.Message.Photo.LastOrDefault().FileId);
+            var file = bot.GetFileAsync(e.CallbackQuery.Message.Photo.LastOrDefault().FileId);
             new Save().creatdir(@"C:\Users\Roma\Desktop\проверка", e.CallbackQuery.Message.Chat.Id.ToString());
-                var fileName = @"C:\Users\Roma\Desktop\проверка\" + e.CallbackQuery.Message.Chat.Id.ToString() + "\\" + file.Result.FileId + "." + file.Result.FilePath.Split('.').Last();
-                Debug.WriteLine(file.Result.FilePath);
-                using (var saveImageStream = File.Open(fileName, FileMode.Create))
-                {
+            var fileName = @"C:\Users\Roma\Desktop\проверка\" + e.CallbackQuery.Message.Chat.Id.ToString() + "\\" + file.Result.FileId + "." + file.Result.FilePath.Split('.').Last();
+            Debug.WriteLine(file.Result.FilePath);
+            using (var saveImageStream = File.Open(fileName, FileMode.Create))
+            {
 
 
-                    await bot.DownloadFileAsync(file.Result.FilePath, saveImageStream);
-                }
-                await bot.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Image save");
-                await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+                await bot.DownloadFileAsync(file.Result.FilePath, saveImageStream);
+            }
+            await bot.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Image save");
+            await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
 
-                //Users[Users.IndexOf(person)].Сount++;
+            //Users[Users.IndexOf(person)].Сount++;
             if (ContextQuest.Questions.Count == UserContext.Users[UserContext.Users.IndexOf(person)].Сount)
             {
 
@@ -217,28 +215,28 @@ namespace WPFShapBot.Models
             //try
             //{
 
-                var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id);
-                if (!UserContext.Users.Contains(person))
-                {
+            var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id);
+            if (!UserContext.Users.Contains(person))
+            {
                 UserContext.Users.Add(person);
-                }
+            }
             UserContext.Users[UserContext.Users.IndexOf(person)].AddMessage($"{person.Nike}: {e.CallbackQuery.Message.Text}");
-                //StepQuestions.StepQuestions(person);
-                if (Read == true)
+            //StepQuestions.StepQuestions(person);
+            if (Read == true)
+            {
+                var person_email = new UserEmail(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id);
+
+                if (!userEmails.Contains(person_email))
                 {
-                    var person_email = new UserEmail(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id);
 
-                    if (!userEmails.Contains(person_email))
-                    {
-
-                        userEmails.Add(person_email);
-                    UserContext.Users[UserContext.Users.IndexOf(person)].Сount=0;
-                    }
-                    userEmails[userEmails.IndexOf(person_email)].AddMessage($"{person.Nike}: {e.CallbackQuery.Message.Text}");
-               //     StepQuestions.StepQuestions();
-                    // MessageBox.Show("Work!!");
+                    userEmails.Add(person_email);
+                    UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
                 }
-          //  UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
+                userEmails[userEmails.IndexOf(person_email)].AddMessage($"{person.Nike}: {e.CallbackQuery.Message.Text}");
+                //     StepQuestions.StepQuestions();
+                // MessageBox.Show("Work!!");
+            }
+            //  UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
             StepQuestions.StepQuestions(person);
             //}
             //catch { }
