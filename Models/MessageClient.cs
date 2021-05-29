@@ -238,7 +238,8 @@ namespace WPFShapBot.Models
                //     StepQuestions.StepQuestions();
                     // MessageBox.Show("Work!!");
                 }
-                StepQuestions.StepQuestions(person);
+          //  UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
+            StepQuestions.StepQuestions(person);
             //}
             //catch { }
         }

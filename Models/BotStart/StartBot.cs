@@ -5,22 +5,24 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using WPFShapBot.Models.DataContext;
 
 namespace WPFShapBot.Models.BotStart
 {
-    class StartBot
+   public class StartBot
     {
        
        // private static ObservableCollection<BotUser> Users;
        // public static ObservableCollection<UserEmail> userEmails;
         static bool ff = false;
 
-         private static ObservableCollection<Questions> resert = Models.DataContext.ContextQuest.Questions;
+          static ObservableCollection<Questions> resert = Models.DataContext.ContextQuest.Questions;
+        ObservableCollection<Commandbot.ComBot> com = new ObservableCollection<Commandbot.ComBot>();
 
-        private static ObservableCollection<Questions> questions = Models.DataContext.ContextQuest.Questions;
+        public static ObservableCollection<Questions> questions = Models.DataContext.ContextQuest.Questions;
         private static ObservableCollection<Questions> command_1;
 
 
@@ -51,24 +53,45 @@ namespace WPFShapBot.Models.BotStart
 
         private async void OnInlineQueryHandler(object sender, CallbackQueryEventArgs e)
         {
-            if (e.CallbackQuery.Data == "Command_1")
+            ObservableCollection<Questions> command = new ObservableCollection<Questions>();
+
+            command.Add(new Questions { ID = 1, Text = "фио" });
+            command.Add(new Questions { ID = 2, Text = "номер телефона" });
+            ObservableCollection<Questions> command1 = new ObservableCollection<Questions>();
+            command1.Add(new Questions { ID = 2, Text = "Отправлено" });
+            com.Add(new Commandbot.ComBot(command) { Name = "Command_1" });
+            com.Add(new Commandbot.ComBot(command1) { Name = "send" });
+            com.Add(new Commandbot.ComBot(resert) { Name = "Command_3" });
+            //    MessageBox.Show(e.CallbackQuery.InlineMessageId);
+            foreach (var item in com)
             {
-                ff = true;
-                questions = new ObservableCollection<Questions>();
-                command_1 = new ObservableCollection<Questions>();
-
-                List<string> ss = new List<string>();
-                ss.Add("send");
-                ss.Add("Управа");
-                command_1.Add(new Questions { ID = 1, Text = "фио" });
-                command_1.Add(new Questions { ID = 2, Text = "номер телефона" });
-                command_1.Add(new Questions { ID = 3, Text = "направление", replyMarkup = new BotButtons().GenInlineButton(ss) });
-                questions = command_1;
-                new MessageClient(UserContext.Users, questions, read: ff, UserContext.UserEmails).GenMessage(e);
-
+                if (e.CallbackQuery.Data == item.Name)
+                {
+                      //    MessageBox.Show(item.Name);
+                    item.ex(e);
+                    break;
+                }
 
             }
-            else if (e.CallbackQuery.Data == "send")
+
+            //if (e.CallbackQuery.Data == "Command_1")
+            //{
+            //    ff = true;
+            //    questions = new ObservableCollection<Questions>();
+            //    command_1 = new ObservableCollection<Questions>();
+
+            //    List<string> ss = new List<string>();
+            //    ss.Add("send");
+            //    ss.Add("Управа");
+            //    command_1.Add(new Questions { ID = 1, Text = "фио" });
+            //    command_1.Add(new Questions { ID = 2, Text = "номер телефона" });
+            //    command_1.Add(new Questions { ID = 3, Text = "направление", replyMarkup = new BotButtons().GenInlineButton(ss) });
+            //    questions = command_1;
+            //    new MessageClient(UserContext.Users, questions, read: ff, UserContext.UserEmails).GenMessage(e);
+
+
+            //}
+            if (e.CallbackQuery.Data == "send")
             {
 
                 string text = "";
@@ -86,15 +109,15 @@ namespace WPFShapBot.Models.BotStart
 
                 await new Save().sAsync(new Save().creatdir(@"C:\Users\Roma\Desktop\проверка", e.CallbackQuery.Message.Chat.Id.ToString()) + "\\" + e.CallbackQuery.Message.Chat.Id.ToString() + ".txt", text);
             }
-            else if (e.CallbackQuery.Data == "Command_3")
-            {
-                questions = new ObservableCollection<Questions>();
-                questions = resert;
-                new MessageClient(UserContext.Users, questions).GenMessage(e);
+            //else if (e.CallbackQuery.Data == "Command_3")
+            //{
+            //    questions = new ObservableCollection<Questions>();
+            //    questions = resert;
+            //    new MessageClient(UserContext.Users, questions).GenMessage(e);
 
 
-                //   await bot.Bot.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Command_2");
-            }
+            //    //   await bot.Bot.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Command_2");
+            //}
 
         }
 

@@ -9,27 +9,27 @@ namespace WPFShapBot.Models
 {
     public class BotButtons
     {
-        private string text = "qqqqqq";
-        private int count = 4;
-        public string Text { get => text; set => text = value; }
-        public int Count { get => count; set => count = value; }
+    //    private string text = "qqqqqq";
+    //    private int count = 4;
+    //    public string Text { get => text; set => text = value; }
+    //    public int Count { get => count; set => count = value; }
 
-        public IReplyMarkup GetButtons()
-        {
-            return new ReplyKeyboardMarkup
-            {
-                Keyboard = new List<List<KeyboardButton>>
-                 {
-                     new List<KeyboardButton>
-                     {
-                        new KeyboardButton{ Text =this.text},
-                        new KeyboardButton{Text =this.text}
-                     }
+        //public IReplyMarkup GetButtons()
+        //{
+        //    return new ReplyKeyboardMarkup
+        //    {
+        //        Keyboard = new List<List<KeyboardButton>>
+        //         {
+        //             new List<KeyboardButton>
+        //             {
+        //                new KeyboardButton{ Text =this.text},
+        //                new KeyboardButton{Text =this.text}
+        //             }
 
-                 }
+        //         }
 
-            };
-        }
+        //    };
+        //}
         public IReplyMarkup GenReplyKeyboard(List<string> listcom)
         {
             var markup = new ReplyKeyboardMarkup();
@@ -78,18 +78,18 @@ namespace WPFShapBot.Models
             return KeyboardButons;
         }
 
-        private InlineKeyboardMarkup send()
-        {
+        //private InlineKeyboardMarkup send()
+        //{
 
-            var KeyboardButons = new InlineKeyboardButton[][]
-                  {
-                  new InlineKeyboardButton[]
-                  {
-                     InlineKeyboardButton.WithCallbackData("Отправить", "send") ,
-                  }
-                  };
-            return KeyboardButons;
-        }
+        //    var KeyboardButons = new InlineKeyboardButton[][]
+        //          {
+        //          new InlineKeyboardButton[]
+        //          {
+        //             InlineKeyboardButton.WithCallbackData("Отправить", "send") ,
+        //          }
+        //          };
+        //    return KeyboardButons;
+        //}
         public InlineKeyboardMarkup InlineKeyboardMarkupButtons()
         {
 
@@ -126,16 +126,16 @@ namespace WPFShapBot.Models
                   };
             return KeyboardButons;
         }
-        //public  InlineKeyboardMarkup InlineKeyboardMarkupButtons()
-        //{
-        //    return new InlineKeyboardMarkup(new[]
-        //   {
-        //            new []
-        //            {
-        //                InlineKeyboardButton.WithCallbackData("Одноразовые товары", "Command_1"),
-        //                InlineKeyboardButton.WithCallbackData("Многоразовые товары","Command_2"),
-        //            }
-        //        });
-        //}
+        ////public  InlineKeyboardMarkup InlineKeyboardMarkupButtons()
+        ////{
+        ////    return new InlineKeyboardMarkup(new[]
+        ////   {
+        ////            new []
+        ////            {
+        ////                InlineKeyboardButton.WithCallbackData("Одноразовые товары", "Command_1"),
+        ////                InlineKeyboardButton.WithCallbackData("Многоразовые товары","Command_2"),
+        ////            }
+        ////        });
+        ////}
     }
 }

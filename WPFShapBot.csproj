@@ -82,6 +82,8 @@
     <Compile Include="Models\BotButtons.cs" />
     <Compile Include="Models\BotStart\StartBot.cs" />
     <Compile Include="Models\BotUser.cs" />
+    <Compile Include="Models\Commandbot\ComBot.cs" />
+    <Compile Include="Models\DataContext\ContextCommand.cs" />
     <Compile Include="Models\DataContext\ContextQuest.cs" />
     <Compile Include="Models\DataContext\UserContext.cs" />
     <Compile Include="Models\MessageClient.cs" />

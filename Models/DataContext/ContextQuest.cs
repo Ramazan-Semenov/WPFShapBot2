@@ -30,6 +30,8 @@ namespace WPFShapBot.Models.DataContext
                 questions = new ObservableCollection<Questions>();
             }
             questions.Add(new Questions { ID = 4, Text = "\nВ чём вопрос?", replyMarkup = (IReplyMarkup)new BotButtons().InlineKeyboardMarkupButtons() });
+            questions.Add(new Questions { ID = 5, Text = "ggggggggggggg", replyMarkup = new ReplyKeyboardRemove() });
+
             questions.Add(new Questions { ID = 5, Text = "Конец", replyMarkup = new ReplyKeyboardRemove() });
 
             return questions;
