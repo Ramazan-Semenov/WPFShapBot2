@@ -14,13 +14,20 @@ namespace WPFShapBot.Models
     public class BotUser : INotifyPropertyChanged, IEquatable<BotUser>
     {
 
+        public BotUser(string NikeName, long ChatId, ObservableCollection<Questions> questions)
+        {
+            id = ChatId;
+            nike = NikeName;
+            this.questions = questions;
+            Messages = new ObservableCollection<string>();
+        }
         public BotUser(string NikeName, long ChatId)
         {
             id = ChatId;
             nike = NikeName;
-
             Messages = new ObservableCollection<string>();
         }
+        public ObservableCollection<Questions> questions { get; set; }
 
         public BotUser()
         {

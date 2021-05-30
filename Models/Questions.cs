@@ -24,7 +24,7 @@ namespace WPFShapBot.Models
         public bool disableWebPagePreview = false;
         public bool disableNotification = false;
         public int replyToMessageId = 0;
-        public IReplyMarkup replyMarkup = new ReplyKeyboardRemove();
+        public IReplyMarkup replyMarkup /*= new ReplyKeyboardRemove()*/;
         public CancellationToken cancellationToken = default;
 
     }

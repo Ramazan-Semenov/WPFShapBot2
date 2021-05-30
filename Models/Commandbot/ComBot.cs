@@ -16,7 +16,7 @@ namespace WPFShapBot.Models.Commandbot
         Action action;
         public ComBot(ObservableCollection<Questions> questions = null, Action action=null, bool write = false)
         {
-            MessageBox.Show(write.ToString());
+           // MessageBox.Show(write.ToString());
 
             ff = write;
             if (questions == null)
@@ -53,7 +53,11 @@ namespace WPFShapBot.Models.Commandbot
             //ff = true;
             BotStart.StartBot.questions = new ObservableCollection<Questions>();
             BotStart.StartBot.questions = command_1;
-          //  MessageBox.Show(Write.WriteUser.ToString());
+            //  MessageBox.Show(Write.WriteUser.ToString());
+            var person1 = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, command_1);
+
+            UserContext.Users[UserContext.Users.IndexOf(person)].questions = command_1;
+//new MessageClient(UserContext.Users, command_1, read: ff, UserContext.UserEmails).GenMessage(e);
             new MessageClient(UserContext.Users, BotStart.StartBot.questions, read: ff, UserContext.UserEmails).GenMessage(e);
 
         }

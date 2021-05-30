@@ -12,10 +12,11 @@ namespace WPFShapBot.Models.BotStart
     {
         static bool ff = true;
 
-        ObservableCollection<Commandbot.ComBot> com = new ObservableCollection<Commandbot.ComBot>();
+        ObservableCollection<ComBot> com = new ObservableCollection<ComBot>();
 
-        public static ObservableCollection<Questions> questions = Models.DataContext.ContextQuest.Questions;
+        public static ObservableCollection<Questions> questions = ContextQuest.Questions;
 
+        private static ObservableCollection<Questions> command_1;
 
 
 
@@ -44,16 +45,33 @@ namespace WPFShapBot.Models.BotStart
         private async void OnInlineQueryHandler(object sender, CallbackQueryEventArgs e)
         {
 
-            
-            com = DataContext.ContextCommand.GetComBots();
-            foreach (var item in com)
+
+            //com = ContextCommand.GetComBots();
+            //foreach (var item in com)
+            //{
+            //    if (e.CallbackQuery.Data == item.Name)
+            //    {
+            //        ff = item.ff;
+            //        item.ex(e);
+            //        break;
+            //    }
+
+            //}
+            if (e.CallbackQuery.Data == "подача документов")
             {
-                if (e.CallbackQuery.Data == item.Name)
-                {
-                    ff = item.ff;
-                    item.ex(e);
-                    break;
-                }
+                ff = true;
+                command_1 = new ObservableCollection<Questions>();
+
+
+                command_1.Add(new Questions { ID = 1, Text = "фио" });
+                command_1.Add(new Questions { ID = 2, Text = "номер телефона" });
+                command_1.Add(new Questions { ID = 3, Text = "направление", replyMarkup = new BotButtons().send() });
+                //questions = command_1;
+                var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, questions);
+
+               DataContext.UserContext. Users[UserContext.Users.IndexOf(person)].questions = command_1;
+                new MessageClient(UserContext.Users, questions, read: ff, UserContext.UserEmails).GenMessage(e);
+
 
             }
 

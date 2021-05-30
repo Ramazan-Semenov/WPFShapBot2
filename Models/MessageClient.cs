@@ -24,7 +24,7 @@ namespace WPFShapBot.Models
             //    this.mes = mes;
             Read = read;
             this.userEmails = userEmails;
-            StepQuestions = new StepQuestionsClass(Users, mes);
+            StepQuestions = new StepQuestionsClass(Users/*, mes*/);
         }
 
         public void GenMessage(MessageEventArgs e)
@@ -44,7 +44,7 @@ namespace WPFShapBot.Models
         }
         public async Task DownloadDocument(MessageEventArgs e)
         {
-            var person = new BotUser(e.Message.Chat.FirstName, e.Message.Chat.Id);
+            var person = new BotUser(e.Message.Chat.FirstName, e.Message.Chat.Id, ContextQuest.Questions);
 
             try
             {
@@ -76,7 +76,7 @@ namespace WPFShapBot.Models
         }
         public async Task DownloadPhoto(MessageEventArgs e)
         {
-            var person = new BotUser(e.Message.Chat.FirstName, e.Message.Chat.Id);
+            var person = new BotUser(e.Message.Chat.FirstName, e.Message.Chat.Id, ContextQuest.Questions);
 
             try
             {
@@ -111,7 +111,7 @@ namespace WPFShapBot.Models
             try
             {
 
-                var person = new BotUser(e.Message.Chat.FirstName, e.Message.Chat.Id);
+                var person = new BotUser(e.Message.Chat.FirstName, e.Message.Chat.Id, ContextQuest.Questions);
                 if (!UserContext.Users.Contains(person))
                 {
                     UserContext.Users.Add(person);
@@ -145,7 +145,7 @@ namespace WPFShapBot.Models
 
         public async Task DownloadDocument(CallbackQueryEventArgs e)
         {
-            var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id);
+            var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, ContextQuest.Questions);
 
             try
             {
@@ -182,7 +182,7 @@ namespace WPFShapBot.Models
             //try
             //{
             ////newuser(e)
-            var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id);
+            var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, ContextQuest.Questions);
 
             var file = bot.GetFileAsync(e.CallbackQuery.Message.Photo.LastOrDefault().FileId);
             new Save().creatdir(@"C:\Users\Roma\Desktop\проверка", e.CallbackQuery.Message.Chat.Id.ToString());
@@ -215,7 +215,7 @@ namespace WPFShapBot.Models
             //try
             //{
 
-            var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id);
+            var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, ContextQuest.Questions);
             if (!UserContext.Users.Contains(person))
             {
                 UserContext.Users.Add(person);

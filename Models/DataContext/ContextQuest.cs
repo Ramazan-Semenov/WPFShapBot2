@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace WPFShapBot.Models.DataContext
@@ -20,12 +21,23 @@ namespace WPFShapBot.Models.DataContext
 
         public static ObservableCollection<Questions> GetQuestions()
         {
+            List<string> vs = new List<string>();
+
+            vs.Add("правила приёма в КубГТУ на обучение");
+            vs.Add("перечень испытаний");
+            vs.Add("информация о наличие общежитий");
+            vs.Add("стоимость обучения");
+            vs.Add("подача документов");
+            vs.Add("Другое");
+            vs.Add("Начать с начала");
             if (questions == null)
             {
                 questions = new ObservableCollection<Questions>();
             }
-            questions.Add(new Questions { ID = 4, Text = "\nВ чём вопрос?", replyMarkup = (IReplyMarkup)new BotButtons().InlineKeyboardMarkupButtons() });
-            questions.Add(new Questions { ID = 5, Text = "ggggggggggggg", replyMarkup = new ReplyKeyboardRemove() });
+            string gg = @"Добро пожаловать в КубГТУ! Абитуриентам мы особо рады, поможем определиться с выбором, расскажем про все этапы подачи документов.
+И самое главное, не нужно никуда ехать, документы на рассмотрение можно прислать сюда, а далее после проверки, специалист приемной комиссии свяжемся с Вами для согласования дальнейших действий 😇 Всё просто)";
+
+            questions.Add(new Questions { ID = 4, Text =gg+ "\nВ чём вопрос?", replyMarkup = new BotButtons().InlineKeyboardMarkupButtons() } );
 
             questions.Add(new Questions { ID = 5, Text = "Конец", replyMarkup = new ReplyKeyboardRemove() });
 
