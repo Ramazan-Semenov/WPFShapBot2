@@ -62,7 +62,7 @@ namespace WPFShapBot.Models
                     await Bot.DownloadFileAsync(file.Result.FilePath, saveImageStream);
                 }
                 await Bot.SendTextMessageAsync(e.Message.Chat.Id, "Document save");
-                await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+                await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
                 UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
 
             }
@@ -93,7 +93,9 @@ namespace WPFShapBot.Models
                     await bot.DownloadFileAsync(file.Result.FilePath, saveImageStream);
                 }
                 await bot.SendTextMessageAsync(e.Message.Chat.Id, "Image save");
-                await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+                await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+
+             //   await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
 
                 UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
 

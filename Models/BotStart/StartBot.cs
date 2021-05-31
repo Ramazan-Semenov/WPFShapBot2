@@ -1,8 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using Telegram.Bot.Args;
+//using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.InputFiles;
 using WPFShapBot.Models.Commandbot;
 using WPFShapBot.Models.DataContext;
 
@@ -45,6 +48,7 @@ namespace WPFShapBot.Models.BotStart
         private async void OnInlineQueryHandler(object sender, CallbackQueryEventArgs e)
         {
 
+            var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, questions);
 
             //com = ContextCommand.GetComBots();
             //foreach (var item in com)
@@ -67,14 +71,62 @@ namespace WPFShapBot.Models.BotStart
                 command_1.Add(new Questions { ID = 2, Text = "номер телефона" });
                 command_1.Add(new Questions { ID = 3, Text = "направление", replyMarkup = new BotButtons().send() });
                 //questions = command_1;
-                var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, questions);
-
-               DataContext.UserContext. Users[UserContext.Users.IndexOf(person)].questions = command_1;
+             //   var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, questions);
+                UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
+                UserContext. Users[UserContext.Users.IndexOf(person)].questions = command_1;
                 new MessageClient(UserContext.Users, questions, read: ff, UserContext.UserEmails).GenMessage(e);
 
 
             }
+            if (e.CallbackQuery.Data == "информация")
+            {
+                using (var stream = System.IO.File.OpenRead(@"C:\Users\Roma\Desktop\WPFBOTEKS\Image\О наличии общежитий.png"))
+                {
 
+                    await TeleBot.Bot.SendPhotoAsync(e.CallbackQuery.Message.Chat.Id, photo: new InputOnlineFile(stream));
+                    UserContext.Users[UserContext.Users.IndexOf(person)].questions = questions;
+
+                }
+            }
+            if (e.CallbackQuery.Data == "перечень испытаний")
+            {
+                using (var stream = System.IO.File.OpenRead(@"C:\Users\Roma\Desktop\WPFBOTEKS\Image\Перечни вступительных испытаний маг.png"))
+                {
+
+                    await TeleBot.Bot.SendPhotoAsync(e.CallbackQuery.Message.Chat.Id, photo: new InputOnlineFile(stream));
+                    UserContext.Users[UserContext.Users.IndexOf(person)].questions = questions;
+
+
+                }
+                using (var stream = System.IO.File.OpenRead(@"C:\Users\Roma\Desktop\WPFBOTEKS\Image\Перечни вступительных испытаний бак и спец.png"))
+                {
+
+                    await TeleBot.Bot.SendPhotoAsync(e.CallbackQuery.Message.Chat.Id, photo: new InputOnlineFile(stream));
+                    UserContext.Users[UserContext.Users.IndexOf(person)].questions = questions;
+
+
+                }
+            }
+            if (e.CallbackQuery.Data == "правила")
+            {
+                await TeleBot.Bot.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Command_2");
+            }
+            if (e.CallbackQuery.Data == "стоимость обучения")
+            {
+                //InputOnlineFile file = new InputOnlineFile();
+          
+                using(var stream = System.IO.File.OpenRead(@"C:\Users\Roma\Desktop\WPFBOTEKS\Image\Оплата.jpg"))
+                {
+
+                    await TeleBot.Bot.SendPhotoAsync(e.CallbackQuery.Message.Chat.Id, photo: new InputOnlineFile(stream));
+
+                }
+
+            }
+            if (e.CallbackQuery.Data == "Другое")
+            {
+                await TeleBot.Bot.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Command_2");
+            }
             if (e.CallbackQuery.Data == "send")
             {
 

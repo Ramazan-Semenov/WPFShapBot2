@@ -20,9 +20,13 @@ namespace WPFShapBot.Models
         /// <param name = "person" > Клиент, котором</ param >
         public void StepQuestions(BotUser person)
         {
-            Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: new BotButtons().InlineKeyboardMarkupButtons());
-            /*Users[Users.IndexOf(person)].Сount++; */
-            UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
+            try
+            {
+                Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+                /*Users[Users.IndexOf(person)].Сount++; */
+                UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
+            }
+            catch { UserContext.Users[UserContext.Users.IndexOf(person)].Сount=0; }
 
             //    try
             //    {
