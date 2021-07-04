@@ -59,7 +59,7 @@ namespace WPFShapBot.Models.BotStart
             //        item.ex(e);
             //        break;
             //    }
-
+           // _bot.DeleteMessageAsync(e.Message.Chat.Id, e.Message.MessageId);
             //}
             if (e.CallbackQuery.Data == "подача документов")
             {
@@ -68,12 +68,61 @@ namespace WPFShapBot.Models.BotStart
 
 
                 command_1.Add(new Questions { ID = 1, Text = "фио" });
-                command_1.Add(new Questions { ID = 2, Text = "номер телефона" });
-                command_1.Add(new Questions { ID = 3, Text = "направление", replyMarkup = new BotButtons().send() });
+                command_1.Add(new Questions { ID = 2, Text = "Номер телефона" });
+                command_1.Add(new Questions { ID = 3, Text = "На какое направление хотите поступить? \nИКСИиБ\nИНГЭ\nИПиПП\nИЭУБ\nИСТИ\nИФН" });
+                command_1.Add(new Questions { ID = 3, Text = "Копия паспорта" });
+                command_1.Add(new Questions { ID = 3, Text = "Копия аттестата" });
+                command_1.Add(new Questions { ID = 3, Text = "Год рождения\n (ДД.MM.ГГГГ)" });
+
+
+                command_1.Add(new Questions { ID = 2, Text = "Конец", replyMarkup = new BotButtons().send() });
+
                 //questions = command_1;
-             //   var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, questions);
+                //   var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, questions);
                 UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
                 UserContext. Users[UserContext.Users.IndexOf(person)].questions = command_1;
+                new MessageClient(UserContext.Users, questions, read: ff, UserContext.UserEmails).GenMessage(e);
+
+
+            }
+            if (e.CallbackQuery.Data == "интитутах")
+            {
+                ff = true;
+                command_1 = new ObservableCollection<Questions>();
+
+
+             
+                command_1.Add(new Questions { ID = 3, Text = "Выберите институт", replyMarkup = new BotButtons().InlineInfo() });
+                //questions = command_1;
+                //   var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, questions);
+                UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
+                UserContext.Users[UserContext.Users.IndexOf(person)].questions = command_1;
+                new MessageClient(UserContext.Users, questions, read: ff, UserContext.UserEmails).GenMessage(e);
+
+
+            }
+            if (e.CallbackQuery.Data == "ИКСИБ")
+            {
+                ff = true;
+                command_1 = new ObservableCollection<Questions>();
+
+
+
+                command_1.Add(new Questions { ID = 3, Text = @"УГС НП КТ: 350000, г. Краснодар, ул. Красная, д. 135, ауд. 91.
+Телефон: (861) 259 - 60 - 83
+Эл.почта: iksib@mail.ru
+
+УГС НП ИБ: 350000,
+                    г.Краснодар,
+                    ул.Красная,
+                    д. 91,
+                    ауд. 204.
+Телефон: (861) 253 - 47 - 31
+Эл.почта: ktibmail@kubstu.ru" });
+                //questions = command_1;
+                //   var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, questions);
+                UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
+                UserContext.Users[UserContext.Users.IndexOf(person)].questions = command_1;
                 new MessageClient(UserContext.Users, questions, read: ff, UserContext.UserEmails).GenMessage(e);
 
 
@@ -87,6 +136,13 @@ namespace WPFShapBot.Models.BotStart
                     UserContext.Users[UserContext.Users.IndexOf(person)].questions = questions;
 
                 }
+            }
+            if (e.CallbackQuery.Data== "Начать с начала")
+            {
+
+                UserContext.Users[UserContext.Users.IndexOf(person)].questions = questions;
+                UserContext.Users[UserContext.Users.IndexOf(person)].Сount=0;
+                new MessageClient(UserContext.Users, questions, read: ff, UserContext.UserEmails).GenMessage(e);
             }
             if (e.CallbackQuery.Data == "перечень испытаний")
             {

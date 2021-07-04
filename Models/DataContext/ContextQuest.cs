@@ -28,6 +28,7 @@ namespace WPFShapBot.Models.DataContext
             vs.Add("информация о наличие общежитий");
             vs.Add("стоимость обучения");
             vs.Add("подача документов");
+            vs.Add("Информация о интитутах");
             vs.Add("Другое");
             vs.Add("Начать с начала");
             if (questions == null)

@@ -44,6 +44,42 @@ namespace WPFShapBot.Models
                   };
             return KeyboardButons;
         }
+        public InlineKeyboardMarkup InlineInfo()
+        {
+
+            var KeyboardButons = new InlineKeyboardButton[][]
+                  {
+                  new InlineKeyboardButton[]
+                  {
+                     InlineKeyboardButton.WithCallbackData("ИКСИиБ", "ИКСИБ") ,
+                  },
+                   new InlineKeyboardButton[]
+                  {
+                     InlineKeyboardButton.WithCallbackData("ИНГЭ", "ИНГЭ") ,
+                  }
+                  ,
+                   new InlineKeyboardButton[]
+                  {
+                     InlineKeyboardButton.WithCallbackData("ИПиПП", "ИПиПП") ,
+                  }
+                     ,
+                   new InlineKeyboardButton[]
+                  {
+                     InlineKeyboardButton.WithCallbackData("ИЭУБ", "ИЭУБ") ,
+                  }
+                   ,
+                   new InlineKeyboardButton[]
+                  {
+                     InlineKeyboardButton.WithCallbackData("ИСТИ", "ИСТИ") ,
+                  }
+                  ,
+                   new InlineKeyboardButton[]
+                  {
+                     InlineKeyboardButton.WithCallbackData("ИФН", "ИФН") ,
+                  }
+                  };
+            return KeyboardButons;
+        }
         public InlineKeyboardMarkup InlineKeyboardMarkupButtons()
         {
 
@@ -69,6 +105,10 @@ namespace WPFShapBot.Models
                   {
                      InlineKeyboardButton.WithCallbackData("подача документов", "подача документов") ,
                   },
+                     new InlineKeyboardButton[]
+                  {
+                     InlineKeyboardButton.WithCallbackData("Информация о институтах", "интитутах") ,
+                  },
                    new InlineKeyboardButton[]
                   {
                      InlineKeyboardButton.WithCallbackData("Другое", "Другое") ,
@@ -76,6 +116,11 @@ namespace WPFShapBot.Models
                     new InlineKeyboardButton[]
                   {
                      InlineKeyboardButton.WithCallbackData("Начать с начала", "Начать с начала") ,
+                  }
+                  ,
+                    new InlineKeyboardButton[]
+                  {
+                     InlineKeyboardButton.WithCallbackData("Факультеты", "Начать с начала") ,
                   }
                   };
             return KeyboardButons;

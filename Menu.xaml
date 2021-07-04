@@ -3,7 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFShapBot" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+        
+        xmlns:local="clr-namespace:WPFShapBot" 
         
     mc:Ignorable="d" Height="733" Width="1080"  Background="Azure" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow">
     <Window.Resources>
@@ -94,13 +98,13 @@
 
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
+                    <ListViewItem  x:Name="Tickets" Height="60">
+                        <StackPanel  Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Ticket" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Tickets" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60">
+                    <ListViewItem  x:Name="Messages" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Message" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Messages" VerticalAlignment="Center"  Margin="20 10"/>

@@ -45,7 +45,14 @@ namespace WPFShapBot
 
                     GridMain.Children.Add(new Views.messbot());
                     break;
+                case "Tickets":
+                     GridMain.Children.Add(new Views.UserControl1());
+                    break;
+                case "Messages":
+                    GridMain.Children.Add(new Views.UserControl2());
+                    break;
                 default:
+                
                     break;
             }
         }

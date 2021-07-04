@@ -22,34 +22,40 @@ namespace WPFShapBot.Models
         {
             try
             {
-                Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+                long iD = UserContext.Users[UserContext.Users.IndexOf(person)].ID;
+                string text = UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text;
+                Bot.SendTextMessageAsync(iD, text, replyMarkup: UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
                 /*Users[Users.IndexOf(person)].Сount++; */
                 UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
             }
             catch { UserContext.Users[UserContext.Users.IndexOf(person)].Сount=0; }
 
-            //    try
+            //try
+            //{
+            //    if (UserContext.Users[UserContext.Users.IndexOf(person)].Сount < UserContext.Users[UserContext.Users.IndexOf(person)].questions.Count)
             //    {
-            //        if (UserContext.Users[UserContext.Users.IndexOf(person)].Сount < ContextQuest.Questions.Count)
-            //        {
-            //            // MessageBox.Show(ContextQuest.Questions.Count.ToString());
-            //          }
-            //        else
-            //        {
-            //            UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
-            //            Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, "Конец", replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
-
-            //        }
+            //        long iD = UserContext.Users[UserContext.Users.IndexOf(person)].ID;
+            //        string text = UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text;
+            //        Bot.SendTextMessageAsync(iD, text, replyMarkup: UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+            //        /*Users[Users.IndexOf(person)].Сount++; */
+            //        UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
             //    }
-            //    catch (Exception e)
+            //    else
             //    {
             //        UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
-            //       // Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, "Конец", replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
-            //        Debug.WriteLine(e.Message);
-            //        File.AppendAllText("data.log", $"{e.Message}\n");
+            //        Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, "Конец");
+
             //    }
             //}
-
+            //catch (Exception e)
+            //{
+            //    UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
+            //    // Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, "Конец", replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
+            //    Debug.WriteLine(e.Message);
+            //    File.AppendAllText("data.log", $"{e.Message}\n");
+            //}
         }
+
     }
-}
+    }
+

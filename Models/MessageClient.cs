@@ -30,17 +30,20 @@ namespace WPFShapBot.Models
         public void GenMessage(MessageEventArgs e)
         {
 
-
-            string msg = $"{DateTime.Now}: {e.Message.Chat.FirstName} {e.Message.Chat.Id} {e.Message.Text}";
-
-            File.AppendAllText("data.log", $"{msg}\n");
-
-            Debug.WriteLine(msg);
-            Application.Current.Dispatcher.Invoke(() =>
+            try
             {
-                NewUser(e);
+                string msg = $"{DateTime.Now}: {e.Message.Chat.FirstName} {e.Message.Chat.Id} {e.Message.Text}";
 
-            });
+                File.AppendAllText("data.log", $"{msg}\n");
+
+                Debug.WriteLine(msg);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    NewUser(e);
+
+                });
+            }
+            catch { }
         }
         public async Task DownloadDocument(MessageEventArgs e)
         {
@@ -61,7 +64,7 @@ namespace WPFShapBot.Models
 
                     await Bot.DownloadFileAsync(file.Result.FilePath, saveImageStream);
                 }
-                await Bot.SendTextMessageAsync(e.Message.Chat.Id, "Document save");
+            //    await Bot.SendTextMessageAsync(e.Message.Chat.Id, "Document save");
                 await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
                 UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
 
@@ -92,7 +95,7 @@ namespace WPFShapBot.Models
 
                     await bot.DownloadFileAsync(file.Result.FilePath, saveImageStream);
                 }
-                await bot.SendTextMessageAsync(e.Message.Chat.Id, "Image save");
+             //   await bot.SendTextMessageAsync(e.Message.Chat.Id, "Image save");
                 await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: UserContext.Users[UserContext.Users.IndexOf(person)].questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
 
              //   await Bot.SendTextMessageAsync(UserContext.Users[UserContext.Users.IndexOf(person)].ID, ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].Text, replyMarkup: ContextQuest.Questions[UserContext.Users[UserContext.Users.IndexOf(person)].Сount].replyMarkup);
@@ -132,7 +135,6 @@ namespace WPFShapBot.Models
                         person_email.Сount = 0;
                     }
                     userEmails[userEmails.IndexOf(person_email)].AddMessage($"{person.Nike}: {e.Message.Text}");
-                    //    MessageBox.Show("dfdfdf");
                 }
 
                 StepQuestions.StepQuestions(person);
@@ -181,8 +183,8 @@ namespace WPFShapBot.Models
         }
         public async Task DownloadPhoto(CallbackQueryEventArgs e)
         {
-            //try
-            //{
+          try
+            {
             ////newuser(e)
             var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, ContextQuest.Questions);
 
@@ -209,13 +211,13 @@ namespace WPFShapBot.Models
                 UserContext.Users[UserContext.Users.IndexOf(person)].Сount++;
 
             }
-            //}
-            //catch { }
+          }
+            catch { }
         }
         private void NewUser(CallbackQueryEventArgs e)
         {
-            //try
-            //{
+            try
+            {
 
             var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, ContextQuest.Questions);
             if (!UserContext.Users.Contains(person))
@@ -240,8 +242,8 @@ namespace WPFShapBot.Models
             }
             //  UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;
             StepQuestions.StepQuestions(person);
-            //}
-            //catch { }
+            }
+            catch { }
         }
         public void GenMessage(CallbackQueryEventArgs e)
         {
