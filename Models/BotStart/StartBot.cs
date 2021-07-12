@@ -28,7 +28,7 @@ namespace WPFShapBot.Models.BotStart
         public StartBot()
         {
 
-
+          Models.DataContext.ContextQuest.  GetQuestions();
         }
         public void start()
         {
@@ -75,7 +75,7 @@ namespace WPFShapBot.Models.BotStart
                 command_1.Add(new Questions { ID = 3, Text = "Год рождения\n (ДД.MM.ГГГГ)" });
 
 
-                command_1.Add(new Questions { ID = 2, Text = "Конец", replyMarkup = new BotButtons().send() });
+                command_1.Add(new Questions { ID = 2, Text = "Конец"/*, replyMarkup = new BotButtons().send()*/ });
 
                 //questions = command_1;
                 //   var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, questions);
@@ -92,7 +92,7 @@ namespace WPFShapBot.Models.BotStart
 
 
              
-                command_1.Add(new Questions { ID = 3, Text = "Выберите институт", replyMarkup = new BotButtons().InlineInfo() });
+                command_1.Add(new Questions { ID = 3, Text = "Выберите институт"/*, replyMarkup = new BotButtons().InlineInfo()*/ });
                 //questions = command_1;
                 //   var person = new BotUser(e.CallbackQuery.Message.Chat.FirstName, e.CallbackQuery.Message.Chat.Id, questions);
                 UserContext.Users[UserContext.Users.IndexOf(person)].Сount = 0;

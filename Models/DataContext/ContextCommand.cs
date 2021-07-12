@@ -27,7 +27,7 @@ namespace WPFShapBot.Models.DataContext
             questions.Add(new Questions { ID = 1, Text = "фио" });
             questions.Add(new Questions { ID = 2, Text = "номер телефона" });
             questions.Add(new Questions { ID = 2, Text = "Направление" });
-            questions.Add(new Questions { ID = 2, Text = "Отправить анкету", replyMarkup = new BotButtons().send() }) ;
+            questions.Add(new Questions { ID = 2, Text = "Отправить анкету"/*, replyMarkup = new BotButtons().send() */}) ;
 
             ObservableCollection<Questions> command1 = new ObservableCollection<Questions>();
             command1.Add(new Questions { ID = 2, Text = "Отправлено" });

@@ -60,7 +60,7 @@ namespace WPFShapBot
         private void opendb_Click(object sender, RoutedEventArgs e)
         {
             GridMain.Children.Clear();
-            //     GridMain.Children.Add(new Views.DBWork());
+                 GridMain.Children.Add(new Views.Setting());
 
         }
     }

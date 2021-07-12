@@ -5,10 +5,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Telegram.Bot.Types.ReplyMarkups;
 using WPFShapBot.Models;
 using WPFShapBot.Models.ConfigFileButton;
 
@@ -18,34 +20,27 @@ namespace WPFShapBot.ViewModel.US
     {
         public US()
         {
-            ObservableCollection<Questions> questions = new ObservableCollection<Questions>();
-            questions.Add(new Questions {  Text= "правила приёма в КубГТУ на обучение" });
-            questions.Add(new Questions { Text = "перечень испытаний" });
-            questions.Add(new Questions { Text = "информация о наличие общежитий" });
-            questions.Add(new Questions { Text = "стоимость обучения" });
-            questions.Add(new Questions { Text = "подача документов" });
+           
 
-            questions.Add(new Questions { Text = "Информация о институтах" });
 
-            questions.Add(new Questions { Text = "Другое" });
-            questions.Add(new Questions { Text = "Начать с начала" });
-            _que = questions;
-            JS = new ObservableCollection<string>();
+            _que = new ObservableCollection<InlineKeyboardButton>();
 
-            AddCommand = new Control.LambdaCommand(OnGetCommandExecuteAdd, CanGetCommandExecuteAdd);
+
+
+
+
             DelCommand = new Control.LambdaCommand(OnGetCommandExecuteDel, CanGetCommandExecuteDel);
-            Click=new Control.LambdaCommand(OnGetCommandExecuteClick, CanGetCommandExecuteClick);
             Up= new Control.LambdaCommand(OnGetCommandExecuteUp, CanGetCommandExecuteUp);
             Down =new  Control.LambdaCommand(OnGetCommandExecuteDown, CanGetCommandExecuteDown);
-
-
+            Search=new Control.LambdaCommand(OnGetCommandExecuteSearch, CanGetCommandExecuteSearch);
+            SaveCommand=new Control.LambdaCommand(OnGetCommandExecuteSave, CanGetCommandExecuteSave);
             Name = GetFile();
-            //Com = new ObservableCollection<Questions>();
-            //Com.Add(new Questions { Text="Список" });
-            //vs = new ObservableCollection<string>();
+
         }
-        private ObservableCollection<Questions> _que ;
-        public ObservableCollection<Questions> que
+
+
+        private ObservableCollection<InlineKeyboardButton> _que ;
+        public ObservableCollection<InlineKeyboardButton> que
         {
             get => _que;
             set
@@ -54,37 +49,40 @@ namespace WPFShapBot.ViewModel.US
                 OnPropertyChanged("que");
             }
         }
-        //public ObservableCollection<Questions> Com
-        //{
-        //    get;set;
-        //}
-        public ObservableCollection<ConfigFileJsonButton> GetFile()
+
+        public ObservableCollection<ConfigFileJson> GetFile()
         {
-            ObservableCollection<ConfigFileJsonButton> lists = new ObservableCollection<ConfigFileJsonButton>();
+            ObservableCollection<ConfigFileJson> lists = new ObservableCollection<ConfigFileJson>();
             DirectoryInfo DirInfo = new DirectoryInfo(Directory.GetCurrentDirectory() + @"\ButtonInlineFile");
             FileInfo[] fiall = DirInfo.GetFiles();
             var fia = from Fi in fiall
-                      where Fi.Extension.ToLower() == ".jpg" ||
-                            Fi.Extension.ToLower() == ".png" ||
-                            Fi.Extension.ToLower() == ".jpeg" ||
-                            Fi.Extension.ToLower() == ".bmp"
+                      where 
+                      Fi.Extension.ToLower() == ".btn"
                       select Fi;
             foreach (FileInfo file in fia)
             {
-                lists.Add(item: new ConfigFileJsonButton { StringPath = file.FullName, Name = file.Name });
+                lists.Add(item: new ConfigFileJson { StringPath = file.FullName, Name = file.Name });
             }
             return lists;
         }
-        public ObservableCollection<ConfigFileJsonButton> Name { get; set; }
-        public ObservableCollection<string> JS { get; set; }
-        public ObservableCollection<string> vs { get; set; }
-        public  Questions x { get; set; }
+        public ObservableCollection<ConfigFileJson> Name { get; set; }
+        public InlineKeyboardButton x { get; set; }
         public string txt { get; set; }
         public ICommand Up { get; set; }
+        public ICommand SaveCommand { get; set; }
+
+        static string pathfile;
+        private bool CanGetCommandExecuteSave(object param) => true;
+        private async void OnGetCommandExecuteSave(object param)
+        {
+            Models.ReadWriteJson.ReadWriteF.Save(pathfile, que);
+
+        }
         private bool CanGetCommandExecuteUp(object param) => true;
         private void OnGetCommandExecuteUp(object param)
         {
             int sw = que.IndexOf(x);
+
             if (sw != -1)
             {
                 int send = sw - 1;
@@ -105,7 +103,25 @@ namespace WPFShapBot.ViewModel.US
 
         public ICommand Search { get; set; }
         private bool CanGetCommandExecuteSearch(object param) => true;
-        private void OnGetCommandExecuteSearch(object param) { }
+        private async void OnGetCommandExecuteSearch(object param)
+        {
+            pathfile = param.ToString();
+            await ReadJsone(param);
+            ///  MessageBox.Show(param.ToString());
+        }
+     
+        private async Task ReadJsone(object param)
+        {
+          
+
+            //Models.ReadWriteJson.ReadWiteJson<ObservableCollection<InlineKeyboardButton>> readWite = new Models.ReadWriteJson.ReadWiteJson<ObservableCollection<InlineKeyboardButton>>();
+
+            que = Models.ReadWriteJson.ReadWriteF.Load(param.ToString());
+
+
+
+        }
+
         /// <summary>
         /// /////////////////////////////////////////////
         /// </summary>
@@ -129,60 +145,7 @@ namespace WPFShapBot.ViewModel.US
 
 
         }
-        /// <summary>
-        /// //////////////////////////
-        /// </summary>
-        public ICommand Click { get; }
-        private bool CanGetCommandExecuteClick(object param) => true;
-        private void OnGetCommandExecuteClick(object param)
-        {
-            vs.Add("1");
-            vs.Add("2");
-            vs.Add("3");
-
-            vs.Add("4");
-
-
-        }
-        /// <summary>
-        /// //////////////////////////////////
-        /// </summary>
-        public ICommand AddCommand { get; }
-        private bool CanGetCommandExecuteAdd(object param) => true; 
-        private void OnGetCommandExecuteAdd(object param)
-        {
-           
-          int sw=  que.IndexOf(x);
-            if (sw != -1)
-            {
-                int send = sw - 1;
-
-                if (send>=0&&send<que.Count)
-                {
-
-               
-
-                    var temp = que[sw];
-                    que[sw] = que[send];
-                    que[send] = temp;
-                }
-            }
-
-
-            //Questions questions = new Questions() { Text = this.txt };
-            //Models.DataContext.ContextQuest.addquestions(questions);
-            que.Add(new Questions { Text = this.txt });
-            //JS.Add(  this.txt );
-
-
-            //foreach (var item in que)
-            //{
-            //    Debug.WriteLine(item.ID);
-
-            //    Debug.WriteLine(item.Text);
-
-            //}
-        }
+      
 
 
         /// <summary>
@@ -192,7 +155,6 @@ namespace WPFShapBot.ViewModel.US
         private bool CanGetCommandExecuteDel(object param) => true;
         private void OnGetCommandExecuteDel(object param)
         {
-            //    Questions questions = new Questions() { Text = this.txt };
             int sw = que.IndexOf(x);
 
             que.RemoveAt(sw);

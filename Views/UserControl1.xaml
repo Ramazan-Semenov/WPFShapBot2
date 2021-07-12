@@ -5,13 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPFShapBot.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+            
+             >
+ 
     <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400"></ColumnDefinition>
             <ColumnDefinition Width="100"></ColumnDefinition>
-            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="300*"></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
 
@@ -25,23 +28,28 @@
 
         <StackPanel Grid.Column="2" >
             <TextBlock Text="Кнопки" />
-            <TextBox Text="{Binding txt, UpdateSourceTrigger=PropertyChanged}" />
-            <Button  Command="{Binding AddCommand}"  Width="90">Добавить</Button>
+            <!--<TextBox Text="{Binding txt, UpdateSourceTrigger=PropertyChanged}" />-->
+            <!--<Button  Command="{Binding AddCommand}"  Width="90">Добавить</Button>-->
             <Button Command="{Binding DelCommand}"  Width="90">Удалить</Button>
+            <Button Command="{Binding SaveCommand}" Width="90">Сохранить</Button>
         </StackPanel>
-        <ListBox Margin="10 100 10 10"   SelectedItem="{Binding x}"   Grid.Column="2" ItemsSource="{Binding que}">
+        <!--<ListBox Margin="10 100 10 10"   SelectedItem="{Binding x}"   Grid.Column="2" ItemsSource="{Binding que}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
-                        <TextBlock Text="{Binding Path=Text}" />
+                        <TextBox Text="{Binding Path=Text}"></TextBox>
+                        <TextBlock Text="{Binding CallbackData}"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
+        <DataGrid SelectedItem="{Binding x}"  Grid.Column="2" Margin="10 100 10 10" ItemsSource="{Binding que}">
+            
+        </DataGrid>
         <Grid Grid.Column="0">
             <StackPanel Background="White" Margin="10,0,30,0"  VerticalAlignment="Center" Height="431">
 
-                <Label Foreground="Black" FontSize="20"  Content="Документы с вопросами" ></Label>
+                <Label Foreground="Black" FontSize="20"  Content="Документы с кнопками" ></Label>
 
                 <ScrollViewer Background="White"  Margin=" 10 20 30 40" Height="348">
 

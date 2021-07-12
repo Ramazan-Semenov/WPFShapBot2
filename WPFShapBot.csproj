@@ -159,7 +159,7 @@
     <Compile Include="Models\BotStart\StartBot.cs" />
     <Compile Include="Models\BotUser.cs" />
     <Compile Include="Models\Commandbot\ComBot.cs" />
-    <Compile Include="Models\ConfigFileButton\ConfigFileJsonButton.cs" />
+    <Compile Include="Models\ConfigFileButton\ConfigFileJson.cs" />
     <Compile Include="Models\DataContext\ButtonContext.cs" />
     <Compile Include="Models\DataContext\ContextCommand.cs" />
     <Compile Include="Models\DataContext\ContextQuest.cs" />
@@ -167,6 +167,7 @@
     <Compile Include="Models\MessageClient.cs" />
     <Compile Include="Models\Questions.cs" />
     <Compile Include="Models\ReadWriteJson\ReadWiteJson.cs" />
+    <Compile Include="Models\ReadWriteJson\ReadWriteF.cs" />
     <Compile Include="Models\Save.cs" />
     <Compile Include="Models\StepQuestionsClass.cs" />
     <Compile Include="Models\TeleBot.cs" />
@@ -182,6 +183,9 @@
     </Compile>
     <Compile Include="Views\messbot.xaml.cs">
       <DependentUpon>messbot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Setting.xaml.cs">
+      <DependentUpon>Setting.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
@@ -216,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\messbot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Setting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WPFShapBot.Models.ReadWriteJson
 {
-    class  ReadWiteJson<T>
+    class  ReadWiteJson<T> where T: class
     {
         /// <summary>
         /// Запись и создание json файла
@@ -18,14 +19,18 @@ namespace WPFShapBot.Models.ReadWriteJson
         {
             try
             {
-                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(path, FileMode.Create))
                 {
+
                     await JsonSerializer.SerializeAsync<T>(fs, collection);
                     Trace.WriteLine("Data has been saved to file");
+                    Trace.WriteLine("sdfsdf");
+
                 }
-            }catch(Exception exp)
+            }
+            catch (Exception exp)
             {
-                Trace.WriteLine(exp+ "  :WriteJson(string path,T collection)");
+                Trace.WriteLine(exp + "  :WriteJson(string path,T collection)");
             }
         }
         /// <summary>
@@ -35,23 +40,16 @@ namespace WPFShapBot.Models.ReadWriteJson
         /// <returns></returns>
         public async Task<T> ReadJson(string path)
         {
-            dynamic obj=null;
-            try
-            {
-                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
-                {
-                    obj = await JsonSerializer.DeserializeAsync<T>(fs);
-                }
-                return obj;
-            }catch(Exception exp)
-            {
-                Trace.WriteLine(exp + "  :ReadJson(string path)");
+            T r;
 
-                return obj;
+            var resultRead= File.OpenRead(path);
 
-
-            }
+            r = await JsonSerializer.DeserializeAsync<T>(resultRead) as T;    
+            
+            return r;
+      
         }
+       
     }
       
 }

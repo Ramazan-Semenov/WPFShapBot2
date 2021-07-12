@@ -21,17 +21,17 @@ namespace WPFShapBot.Models
             markup.Keyboard = keyboardButtons;
             return markup;
         }
-        //public static InlineKeyboardMarkup InlineKeyboardMarkupMaker(List<string> vs)
-        //{
-        //    InlineKeyboardButton[][] KeyboardButons = new InlineKeyboardButton[1][];
-        //    KeyboardButons
+        public  InlineKeyboardMarkup InlineKeyboardMarkupMaker(List<InlineKeyboardButton> vs)
+        {
+            //InlineKeyboardButton[][] KeyboardButons = new InlineKeyboardButton[1][];
+            //KeyboardButons
 
-        //    InlineKeyboardButton[][] ik = vs.Select(item => new[]
-        //    {
-        //      new InlineKeyboardButton(){ Text=item,  CallbackData=item }
-        //}).ToArray();
-        //    return new InlineKeyboardMarkup(ik);
-        //}
+            InlineKeyboardButton[][] ik = vs.Select(item => new[]
+            {
+              new InlineKeyboardButton(){ Text=item.Text,  CallbackData=item.CallbackData }
+        }).ToArray();
+            return new InlineKeyboardMarkup(ik);
+        }
         public InlineKeyboardMarkup send()
         {
 
@@ -46,6 +46,11 @@ namespace WPFShapBot.Models
         }
         public InlineKeyboardMarkup InlineInfo()
         {
+            //InlineKeyboardButton[][] KeyboardButons=new InlineKeyboardButton[1][];
+            //KeyboardButons[0][0] = new InlineKeyboardButton() { Text = "ИКСИиБ" };
+            ////KeyboardButons[0][0].Text = "ИКСИиБ";
+            ////KeyboardButons[0][0].CallbackData = "ИКСИБ";
+            //return new InlineKeyboardMarkup(KeyboardButons);
 
             var KeyboardButons = new InlineKeyboardButton[][]
                   {

@@ -85,7 +85,7 @@
                 <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
                     <ListViewItem x:Name="ItemHome" Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10"/>
+                            <materialDesign:PackIcon Kind="Queue" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Список вопросов" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
@@ -93,21 +93,21 @@
                         <StackPanel Orientation="Horizontal"  >
 
 
-                            <materialDesign:PackIcon Kind="map" Height="25" Width="25" Margin="10" />
+                            <materialDesign:PackIcon Kind="Message" Height="25" Width="25" Margin="10" />
                             <TextBlock Text="Сообщения" VerticalAlignment="Center" Margin="20 10" />
 
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem  x:Name="Tickets" Height="60">
                         <StackPanel  Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Ticket" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Tickets" VerticalAlignment="Center"  Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="Button" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Кнопки" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem  x:Name="Messages" Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Message" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Messages" VerticalAlignment="Center"  Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="CallToAction" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Действия на кнопки" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>

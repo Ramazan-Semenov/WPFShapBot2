@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPFShapBot.Models.ConfigFileButton
 {
-    class ConfigFileJsonButton
+    class ConfigFileJson
     {
         public string StringPath { get; set; }
         public string Name { get; set; }
